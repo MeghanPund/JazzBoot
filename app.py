@@ -1,3 +1,4 @@
+from instapy import InstaPy 
 from time import sleep
 from selenium import webdriver
 import secure_info
