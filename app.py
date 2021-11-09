@@ -28,6 +28,9 @@ def login():
 
     sleep(3)
 
+    not_now_button = browser.find_element_by_xpath("//button[contains(text(), 'Not Now')]")
+    not_now_button.click()
+    sleep(3)
 
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
@@ -60,7 +63,7 @@ if __name__ == '__main__':
     login()
     search(tag)
 
-    while like_cnt < 100:
+    while like_cnt < 15:
         like()
 
     browser.quit()
