@@ -5,7 +5,7 @@ A forray into browser automation, featuring selenium. Created purely for my own 
 ## Note
 If you intend to clone this and run it with your own account, you will need to find 
 ```
-    username_input.send_keys(secure_info.username) and 
+    username_input.send_keys(secure_info.username) 
     password_input.send_keys(secure_info.password)
 ```
 and replace `secure_info.username` with your own username, as well as `secure_info.password` with your own password, as 'string'.
