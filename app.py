@@ -1,5 +1,7 @@
 from time import sleep
 from selenium import webdriver
+import secure_info
+
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
@@ -13,8 +15,8 @@ sleep(2)
 username_input = browser.find_element_by_css_selector("input[name='username']")
 password_input = browser.find_element_by_css_selector("input[name='password']")
 
-username_input.send_keys("jazz_boot")
-password_input.send_keys("bX$Zl4L23Qbg")
+username_input.send_keys(secure_info.username)
+password_input.send_keys(secure_info.password)
 
 login_button = browser.find_element_by_xpath("//div[text()='Log In']")
 login_button.click()
