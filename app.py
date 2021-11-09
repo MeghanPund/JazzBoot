@@ -9,9 +9,8 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
 
 def login():
-  
-    browser.implicitly_wait(5)
 
+    browser.implicitly_wait(5)
     browser.get("http://www.instagram.com")
     print(browser.title)
 
@@ -34,25 +33,31 @@ def login():
 
     browser.get('https://www.instagram.com/explore/tags/jazz')
 
-# def search(tag):
-#     address = 'https://www.instagram.com/explore/tags/'
-#     browser.get(address + tag)
-#     sleep(random.randint(3, 4))
-#     browser.find_elements_by_class_name('_9AhH0')[10].click()
-#     sleep(random.randint(3, 4))
+def search(tag):
+    address = 'https://www.instagram.com/explore/tags/'
+    browser.get(address + tag)
+    sleep(random.randint(3, 4))
+    browser.find_elements_by_class_name('_9AhH0')[10].click()
+    sleep(random.randint(3, 4))
 
-# def like():
-#     global like_cnt
-#     try:
-#         browser.find_element_by_class_name('coreSpriteRightPaginationArrow').click()
-#         sleep(random.randint(3, 4))
-#         browser.find_element_by_class_name('fr66n').click()
-#         sleep(random.randint(1, 2))
-#         like_cnt += 1
-#     except:
-#         print('Error Occurred While Liking')
-#         sleep(5)
-#         return 
+def like():
+    global likes
+    try:
+        browser.find_element_by_class_name('coreSpriteRightPaginationArrow').click()
+        sleep(random.randint(3, 4))
+        browser.find_element_by_class_name('fr66n').click()
+        sleep(random.randint(1, 2))
+        likes += 1
+    except:
+        print('Error Occurred While Liking')
+        sleep(5)
+        return 
+
+login()
+search('jazz')
+likes = 0
+while likes < 15:
+         like()
 
 # if __name__ == '__main__':
 
