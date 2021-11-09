@@ -31,8 +31,6 @@ def login():
     not_now_button.click()
     sleep(3)
 
-    browser.get('https://www.instagram.com/explore/tags/jazz')
-
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
     browser.get(address + tag)
@@ -41,37 +39,30 @@ def search(tag):
     sleep(random.randint(3, 4))
 
 def like():
-    global likes
+    global like_count
     try:
-        browser.find_element_by_class_name('coreSpriteRightPaginationArrow').click()
+        browser.find_element_by_class_name('wpO6b  ').click()
         sleep(random.randint(3, 4))
-        browser.find_element_by_class_name('fr66n').click()
+        browser.find_element_by_class_name('_8-yf5').click()
         sleep(random.randint(1, 2))
-        likes += 1
+        like_count += 1
     except:
         print('Error Occurred While Liking')
         sleep(5)
         return 
 
 login()
-search('jazz')
-likes = 0
-while likes < 15:
-         like()
 
-# if __name__ == '__main__':
+tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband']
 
-#     tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband']
+like_count = 0
+begin = datetime.datetime.today()
+tag = random.choice(tags)
 
-#     like_cnt = 0
-#     begin = datetime.datetime.today()
-#     tag = random.choice(tags)
+search(tag)
 
-#     login()
-#     search(tag)
+while like_count < 15:
+    like()
 
-#     while like_cnt < 15:
-#         like()
-
-#     browser.quit()
-#     end = datetime.datetime.today()
+browser.quit()
+end = datetime.datetime.today()
