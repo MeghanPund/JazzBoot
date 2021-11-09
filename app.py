@@ -51,20 +51,19 @@ def like():
         sleep(5)
         return 
 
-login()
-
 tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
 
-# like_count = 0
-# begin = datetime.today()
+like_count = 0
+begin = datetime.today()
 tag = random.choice(tags)
 
+login()
 search(tag)
 
 like()
 
-# while like_count < 15:
-#     like()
+while like_count < 15:
+    like()
 
-# browser.quit()
-# end = datetime.today()
+browser.quit()
+end = datetime.today()
