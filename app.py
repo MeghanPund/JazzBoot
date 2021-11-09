@@ -32,39 +32,41 @@ def login():
     not_now_button.click()
     sleep(3)
 
-def search(tag):
-    address = 'https://www.instagram.com/explore/tags/'
-    browser.get(address + tag)
-    sleep(random.randint(3, 4))
-    browser.find_elements_by_class_name('_9AhH0')[10].click()
-    sleep(random.randint(3, 4))
+    browser.get('https://www.instagram.com/explore/tags/jazz')
 
-def like():
-    global like_cnt
-    try:
-        browser.find_element_by_class_name('coreSpriteRightPaginationArrow').click()
-        sleep(random.randint(3, 4))
-        browser.find_element_by_class_name('fr66n').click()
-        sleep(random.randint(1, 2))
-        like_cnt += 1
-    except:
-        print('Error Occurred While Liking')
-        sleep(5)
-        return 
+# def search(tag):
+#     address = 'https://www.instagram.com/explore/tags/'
+#     browser.get(address + tag)
+#     sleep(random.randint(3, 4))
+#     browser.find_elements_by_class_name('_9AhH0')[10].click()
+#     sleep(random.randint(3, 4))
 
-if __name__ == '__main__':
+# def like():
+#     global like_cnt
+#     try:
+#         browser.find_element_by_class_name('coreSpriteRightPaginationArrow').click()
+#         sleep(random.randint(3, 4))
+#         browser.find_element_by_class_name('fr66n').click()
+#         sleep(random.randint(1, 2))
+#         like_cnt += 1
+#     except:
+#         print('Error Occurred While Liking')
+#         sleep(5)
+#         return 
 
-    tags = ['jazz','bebop','hardbop','swing']
+# if __name__ == '__main__':
 
-    like_cnt = 0
-    begin = datetime.datetime.today()
-    tag = random.choice(tags)
+#     tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband']
 
-    login()
-    search(tag)
+#     like_cnt = 0
+#     begin = datetime.datetime.today()
+#     tag = random.choice(tags)
 
-    while like_cnt < 15:
-        like()
+#     login()
+#     search(tag)
 
-    browser.quit()
-    end = datetime.datetime.today()
+#     while like_cnt < 15:
+#         like()
+
+#     browser.quit()
+#     end = datetime.datetime.today()
