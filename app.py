@@ -41,11 +41,11 @@ def search(tag):
 def like():
     global like_count
     try:
-        browser.find_element_by_class_name('wpO6b  ').click()
+        browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button').click()
         sleep(random.randint(3, 4))
-        browser.find_element_by_class_name('_8-yf5').click()
+        browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
-        like_count += 1
+        # like_count += 1
     except:
         print('Error Occurred While Liking')
         sleep(5)
@@ -53,16 +53,18 @@ def like():
 
 login()
 
-tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband']
+tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
 
-like_count = 0
-begin = datetime.datetime.today()
+# like_count = 0
+# begin = datetime.today()
 tag = random.choice(tags)
 
 search(tag)
 
-while like_count < 15:
-    like()
+like()
 
-browser.quit()
-end = datetime.datetime.today()
+# while like_count < 15:
+#     like()
+
+# browser.quit()
+# end = datetime.today()
