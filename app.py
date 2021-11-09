@@ -1,4 +1,3 @@
-from instapy import InstaPy 
 from time import sleep
 from selenium import webdriver
 import secure_info
@@ -22,6 +21,11 @@ password_input.send_keys(secure_info.password)
 login_button = browser.find_element_by_xpath("//div[text()='Log In']")
 login_button.click()
 
+
+not_now_button = browser.find_element_by_xpath("//button[text()='Not Now']")
+not_now_button.click()
+
+not_now_button.click()
+
 sleep(5)
 
-browser.close()
