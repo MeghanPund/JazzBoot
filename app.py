@@ -60,6 +60,7 @@ like()
 
 while like_count < 15:
     like()
+    like_count += 1
 
 browser.quit()
 end = datetime.today()
