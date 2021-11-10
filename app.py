@@ -19,8 +19,8 @@ def login():
     username_input = browser.find_element_by_css_selector("input[name='username']")
     password_input = browser.find_element_by_css_selector("input[name='password']")
 
-    username_input.send_keys(secure_info.username)
-    password_input.send_keys(secure_info.password)
+    username_input.send_keys(secure_info.username2)
+    password_input.send_keys(secure_info.password2)
 
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
@@ -62,5 +62,7 @@ while like_count < 15:
     like()
     like_count += 1
 
+
+print("You've liked", like_count, "posts. All done!")
 browser.quit()
 end = datetime.today()
