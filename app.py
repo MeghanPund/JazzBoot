@@ -19,8 +19,8 @@ def login():
     username_input = browser.find_element_by_css_selector("input[name='username']")
     password_input = browser.find_element_by_css_selector("input[name='password']")
 
-    username_input.send_keys(secure_info.username2)
-    password_input.send_keys(secure_info.password2)
+    username_input.send_keys(secure_info.username)
+    password_input.send_keys(secure_info.password)
 
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
@@ -41,7 +41,7 @@ def like():
         sleep(random.randint(3, 4))
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
-        # like_count += 1
+        
     except:
         print('Error Occurred While Liking')
         sleep(5)
@@ -66,3 +66,10 @@ while like_count < 15:
 print("You've liked", like_count, "posts. All done!")
 browser.quit()
 end = datetime.today()
+
+def comment():
+    comments = ['','',''] 
+    comment = random.choice(comments)
+    text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+    text_box.click()
+    text_box.send_keys(comment)
