@@ -19,8 +19,8 @@ def login():
     username_input = browser.find_element_by_css_selector("input[name='username']")
     password_input = browser.find_element_by_css_selector("input[name='password']")
 
-    username_input.send_keys(secure_info.username)
-    password_input.send_keys(secure_info.password)
+    username_input.send_keys(secure_info.username2)
+    password_input.send_keys(secure_info.password2)
 
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
@@ -37,42 +37,45 @@ def search(tag):
 def like():
     global like_count
     try:
+        # Like post (click heart)
         browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button').click()
         sleep(random.randint(3, 4))
-        browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
-        sleep(random.randint(1, 2))
-        
+                
     except:
         print('Error Occurred While Liking')
         sleep(5)
         return 
 
 def comment():
-    comments = ["Can't stop, won't stop!",'Yaaaaass!!'] 
+    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!'] 
     comment = random.choice(comments)
     text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
     text_box.click()
+    sleep(random.randint(3, 4))
     text_box.send_keys(comment)
-    comment_button = browser.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div/div[2]/div/article[1]/div/div[3]/div/div/section[3]/div/form/button[2]')
+    sleep(random.randint(3, 4))
+    comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
     comment_button.click()
+    sleep(random.randint(3, 4))
 
-tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
+def run_bot(num_of_interactions=int):
 
-like_count = 0
-begin = datetime.today()
-tag = random.choice(tags)
+    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
 
-login()
-search(tag)
+    like_count = 0
+    tag = random.choice(tags)
 
-like()
+    login()
+    search(tag)
+    
+    while like_count < num_of_interactions:
+        like()
+        # comment()
+        # Page to the right with arrow
+        browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
+        sleep(random.randint(1, 2))
+        like_count += 1
+    print("You've liked", like_count, "posts. All done!")
+    browser.quit()
 
-while like_count < 15:
-    like()
-    comment()
-    like_count += 1
-
-
-print("You've liked", like_count, "posts. All done!")
-browser.quit()
-end = datetime.today()
+run_bot(3)
