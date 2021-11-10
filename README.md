@@ -15,5 +15,5 @@ As of 9 November 2021, this bot only logs in, searches for a hashtag (randomly c
 
 ## Future Functionality
 1. Follow accounts that meet criteria
-2. Comment on posts that meet criteria
+2. Comment on posts that meet criteria (I've begun work on this as of 10 November)
 3. Streamline the code so it is more efficient and can run faster
