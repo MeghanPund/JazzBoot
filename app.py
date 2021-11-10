@@ -47,6 +47,15 @@ def like():
         sleep(5)
         return 
 
+def comment():
+    comments = ["Can't stop, won't stop!",'Yaaaaass!!'] 
+    comment = random.choice(comments)
+    text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+    text_box.click()
+    text_box.send_keys(comment)
+    comment_button = browser.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div/div[2]/div/article[1]/div/div[3]/div/div/section[3]/div/form/button[2]')
+    comment_button.click()
+
 tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
 
 like_count = 0
@@ -60,16 +69,10 @@ like()
 
 while like_count < 15:
     like()
+    comment()
     like_count += 1
 
 
 print("You've liked", like_count, "posts. All done!")
 browser.quit()
 end = datetime.today()
-
-def comment():
-    comments = ['','',''] 
-    comment = random.choice(comments)
-    text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
-    text_box.click()
-    text_box.send_keys(comment)
