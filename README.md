@@ -1,6 +1,6 @@
 # Jazz Bot
 ## Program Description
-A forray into browser automation, featuring selenium. Created purely for my own amusement.
+A foray into browser automation, featuring selenium. Created purely for my own amusement.
 
 ## Note
 If you intend to clone this and run it with your own account, you will need to find 
