@@ -47,12 +47,14 @@ def like():
         return 
 
 def comment():
-    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!'] 
+    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!', '🔥🔥🔥', ''] 
     comment = random.choice(comments)
     text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+    browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]')
     text_box.click()
     sleep(random.randint(3, 4))
-    text_box.send_keys(comment)
+    browser.find_element_by_tag_name('textbox').send_keys(comment)
+    browser.find_element_by_tag_name('textbox').send_keys(Keys.ENTER)
     sleep(random.randint(3, 4))
     comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
     comment_button.click()
@@ -60,7 +62,7 @@ def comment():
 
 def run_bot(num_of_interactions=int):
 
-    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband']
+    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax']
 
     like_count = 0
     tag = random.choice(tags)
