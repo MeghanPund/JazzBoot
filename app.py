@@ -83,10 +83,10 @@ def run_bot(num_of_interactions=int):
 run_bot(3)
 
 def follow():
-    keywords = []
+    keywords = ['jazz', 'bebop']
     keyword = random.choice(keywords)
     address = 'https://www.instagram.com/explore/people/'
     browser.get(address + keyword)
     sleep(random.randint(3, 4))
-    browser.find_elements_by_class_name('_9AhH0')[10].click()
+    browser.find_elements_by_class_name('').click()
     sleep(random.randint(3, 4))
