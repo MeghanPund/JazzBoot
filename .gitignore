@@ -1,2 +1,3 @@
 python-virtual-environments/
 secure_info.py
+__pycache__/
