@@ -15,5 +15,6 @@ You will also need to install Google Chrome's chromedriver, or the webdriver for
 As of 14 November 2021, this bot logs in, searches for a hashtag (randomly chosen from a list), and comments and likes a set number of posts (the parameter passed to the runbot() function) with that hashtag.
 
 ## Future Functionality
-1. Follow accounts that meet criteria
+1. Refine criteria for interaction with accounts
 2. Streamline the code so it is more efficient and can run faster
+3. Follow users who match the criteria
