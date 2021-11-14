@@ -9,6 +9,7 @@ If you intend to clone this and run it with your own account, you will need to f
     password_input.send_keys(secure_info.password)
 ```
 and replace `secure_info.username` with your own username, as well as `secure_info.password` with your own password, as 'string'.
+You will also need to install Google Chrome's chromedriver, or the webdriver for your browser of choice. After doing that, you'll need to reconfigure the PATH variable to the correct filepath.
 
 ## Functionality
 As of 9 November 2021, this bot only logs in, searches for a hashtag (randomly chosen from a list), and likes posts with that hashtag.
