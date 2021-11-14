@@ -18,3 +18,4 @@ As of 14 November 2021, this bot logs in, searches for a hashtag (randomly chose
 1. Refine criteria for interaction with accounts
 2. Streamline the code so it is more efficient and can run faster
 3. Follow users who match the criteria
+4. Write a log in a text file that show the date/timestamp, the actions taken, and on which accounts as the program runs
