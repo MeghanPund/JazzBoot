@@ -12,7 +12,7 @@ and replace `secure_info.username` with your own username, as well as `secure_in
 You will also need to install Google Chrome's chromedriver, or the webdriver for your browser of choice. After doing that, you'll need to reconfigure the PATH variable to the correct filepath.
 
 ## Functionality
-As of 9 November 2021, this bot logs in, searches for a hashtag (randomly chosen from a list), and comments and likes a set number of posts (the parameter passed to the runbot() function) with that hashtag.
+As of 14 November 2021, this bot logs in, searches for a hashtag (randomly chosen from a list), and comments and likes a set number of posts (the parameter passed to the runbot() function) with that hashtag.
 
 ## Future Functionality
 1. Follow accounts that meet criteria
