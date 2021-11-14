@@ -1,5 +1,6 @@
 from time import sleep
 from selenium import webdriver
+import selenium
 import secure_info
 import random
 from datetime import datetime
@@ -32,14 +33,14 @@ def search(tag):
     browser.get(address + tag)
     sleep(random.randint(3, 4))
     browser.find_elements_by_class_name('_9AhH0')[10].click()
-    sleep(random.randint(3, 4))
+    sleep(random.randint(2, 4))
 
 def like():
     global like_count
     try:
         # Like post (click heart)
         browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button').click()
-        sleep(random.randint(3, 4))
+        sleep(random.randint(1, 4))
                 
     except:
         print('Error Occurred While Liking')
@@ -47,14 +48,12 @@ def like():
         return 
 
 def comment():
-    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!', '🔥🔥🔥', ''] 
+    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!', '🔥🔥🔥',] 
     comment = random.choice(comments)
     text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
-    # browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]')
     text_box.click()
     sleep(random.randint(3, 4))
     browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(comment)
-    # browser.find_element_by_tag_name('textbox').send_keys(Keys.ENTER)
     sleep(random.randint(3, 4))
     comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
     comment_button.click()
@@ -62,7 +61,7 @@ def comment():
 
 def run_bot(num_of_interactions=int):
 
-    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax']
+    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax',]
 
     like_count = 0
     tag = random.choice(tags)
@@ -72,7 +71,12 @@ def run_bot(num_of_interactions=int):
     
     while like_count < num_of_interactions:
         like()
-        comment()
+        # try except for disabled comments !! update this to not catch every error !!
+        try:
+            comment()
+        except:
+            selenium.common.exceptions.NoSuchElementException
+            print('User has disabled comments on this post.')
         # Page to the right with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
@@ -80,13 +84,13 @@ def run_bot(num_of_interactions=int):
     print("You've liked", like_count, "posts. All done!")
     browser.quit()
 
-run_bot(3)
+run_bot(5)
 
 def follow():
     keywords = ['jazz', 'bebop']
     keyword = random.choice(keywords)
     address = 'https://www.instagram.com/explore/people/'
     browser.get(address + keyword)
-    sleep(random.randint(3, 4))
+    sleep(random.randint(2, 4))
     browser.find_elements_by_class_name('').click()
-    sleep(random.randint(3, 4))
+    sleep(random.randint(2, 4))
