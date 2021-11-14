@@ -50,11 +50,11 @@ def comment():
     comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!', '🔥🔥🔥', ''] 
     comment = random.choice(comments)
     text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
-    browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]')
+    # browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]')
     text_box.click()
     sleep(random.randint(3, 4))
-    browser.find_element_by_tag_name('textbox').send_keys(comment)
-    browser.find_element_by_tag_name('textbox').send_keys(Keys.ENTER)
+    browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(comment)
+    # browser.find_element_by_tag_name('textbox').send_keys(Keys.ENTER)
     sleep(random.randint(3, 4))
     comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
     comment_button.click()
@@ -72,7 +72,7 @@ def run_bot(num_of_interactions=int):
     
     while like_count < num_of_interactions:
         like()
-        # comment()
+        comment()
         # Page to the right with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
