@@ -1,10 +1,12 @@
 from time import sleep
+from emoji.core import emojize
 from selenium import webdriver
 import selenium
 import secure_info
 import random
 from datetime import datetime
 from selenium.webdriver.common.keys import Keys
+import emoji
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
@@ -48,7 +50,7 @@ def like():
         return 
 
 def comment():
-    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!', '🔥🔥🔥',] 
+    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!',] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
     comment = random.choice(comments)
     text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
     text_box.click()
