@@ -38,52 +38,51 @@ def search(tag):
     sleep(random.randint(2, 4))
 
 def like():
-    global like_count
     try:
         # Like post (click heart)
         browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button').click()
-        sleep(random.randint(1, 4))
-                
+        sleep(random.randint(1, 4))      
     except:
         print('Error Occurred While Liking')
         sleep(5)
         return 
 
-def comment():
-    comments = ["Can't stop, won't stop!",'Yaaaaass!!', 'Get in there!!',] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
-    comment = random.choice(comments)
-    text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
-    text_box.click()
-    sleep(random.randint(3, 4))
-    browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(comment)
-    sleep(random.randint(3, 4))
-    comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
-    comment_button.click()
-    sleep(random.randint(3, 4))
+def comment(silly_comment):
+    
+    # try except for disabled comments !! update this to not catch every error !!
+    try:
+        text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+        text_box.click()
+        sleep(random.randint(3, 4))
+        browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(silly_comment)
+        sleep(random.randint(3, 4))
+        comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
+        comment_button.click()
+        sleep(random.randint(3, 4))
+    except:
+        selenium.common.exceptions.NoSuchElementException
+        print('User has disabled comments on this post.')        
 
 def run_bot(num_of_interactions=int):
 
     tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax',]
-
-    like_count = 0
     tag = random.choice(tags)
-
+    comments = ["Can't stop, won't stop!","Yaaaaass!!", "Get in there!!",] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
+    silly_comment = random.choice(comments)
+    
+    like_count = 0
+    
     login()
     search(tag)
     
     while like_count < num_of_interactions:
         like()
-        # try except for disabled comments !! update this to not catch every error !!
-        try:
-            comment()
-        except:
-            selenium.common.exceptions.NoSuchElementException
-            print('User has disabled comments on this post.')
-        # Page to the right with arrow
+        comment(silly_comment)
+        like_count += 1
+        # page right to next post with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
-        like_count += 1
-    print("You've liked", like_count, "posts. All done!")
+    print("You've liked and commented on", like_count, "posts. All done!")
     browser.quit()
 
 run_bot(5)
