@@ -13,7 +13,7 @@ browser = webdriver.Chrome(PATH)
 
 def login():
 
-    browser.implicitly_wait(5)
+    browser.implicitly_wait(3)
     browser.get("http://www.instagram.com")
     print(browser.title)
 
@@ -28,7 +28,7 @@ def login():
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
 
-    sleep(3)
+    sleep(2)
 
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
@@ -44,18 +44,20 @@ def like():
         sleep(random.randint(1, 4))      
     except:
         print('Error Occurred While Liking')
-        sleep(5)
         return 
 
-def comment(silly_comment):
+def comment():
     
+    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!", 
+    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!"] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
+    silly_comment = random.choice(comments)
+
     # try except for disabled comments !! update this to not catch every error !!
     try:
         text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
         text_box.click()
-        sleep(random.randint(3, 4))
         browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(silly_comment)
-        sleep(random.randint(3, 4))
+        sleep(random.randint(1, 2))
         comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
         comment_button.click()
         sleep(random.randint(3, 4))
@@ -67,8 +69,6 @@ def run_bot(num_of_interactions=int):
 
     tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax',]
     tag = random.choice(tags)
-    comments = ["Can't stop, won't stop!","Yaaaaass!!", "Get in there!!",] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
-    silly_comment = random.choice(comments)
     
     like_count = 0
     
@@ -77,7 +77,7 @@ def run_bot(num_of_interactions=int):
     
     while like_count < num_of_interactions:
         like()
-        comment(silly_comment)
+        comment()
         like_count += 1
         # page right to next post with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
