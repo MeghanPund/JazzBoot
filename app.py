@@ -29,7 +29,7 @@ def login():
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
 
-    sleep(2)
+    sleep(2.5)
 
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
@@ -50,8 +50,9 @@ def like():
 def comment():
     
     comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!", 
-    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!"] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
+    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!"] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
     silly_comment = random.choice(comments)
+    comment.silly_comment = silly_comment
 
     # try except for disabled comments !! update this to not catch every error !!
     try:
@@ -64,12 +65,23 @@ def comment():
         sleep(random.randint(3, 4))
     except:
         selenium.common.exceptions.NoSuchElementException
-        print('User has disabled comments on this post.')        
+        print('User has disabled comments on this post.')  
+      
 
+# update line_prepender, and also write username alongside comment posted
 def writeLogToFile():
+    # def line_prepender(filename, line):
+    #     with open(filename, 'r+') as IG_log:
+    #         content = IG_log.read()
+    #         IG_log.seek(0, 0)
+    #         IG_log.write(line.rstrip('\r\n') + '\n' + content)
+    #         IG_log.close()
     IG_log = open('IG_log.txt', 'a')
-    IG_log.write(datetime.now().strftime("%Y/%m/%d, %H:%M:%S/n"))
+    IG_log.write((datetime.now().strftime("%Y/%m/%d %H:%M:%S: ") + str(comment.silly_comment) + '\n'))
     IG_log.close()
+    # username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').getText()
+    # line_prepender('IG_log.txt', (datetime.now().strftime("%Y/%m/%d, %H:%M:%S") + str(comment.silly_comment)))
+    
 
 def run_bot(num_of_interactions=int):
 
