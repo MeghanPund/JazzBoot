@@ -1,3 +1,4 @@
+from os import close
 from time import sleep
 from emoji.core import emojize
 from selenium import webdriver
@@ -65,6 +66,11 @@ def comment():
         selenium.common.exceptions.NoSuchElementException
         print('User has disabled comments on this post.')        
 
+def writeLogToFile():
+    IG_log = open('IG_log.txt', 'a')
+    IG_log.write(datetime.now().strftime("%Y/%m/%d, %H:%M:%S/n"))
+    IG_log.close()
+
 def run_bot(num_of_interactions=int):
 
     tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax',]
@@ -82,10 +88,14 @@ def run_bot(num_of_interactions=int):
         # page right to next post with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
+        writeLogToFile()
     print("You've liked and commented on", like_count, "posts. All done!")
     browser.quit()
 
 run_bot(5)
+
+
+# xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx UNDER CONSTRUCTION xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 def follow():
     keywords = ['jazz', 'bebop']
