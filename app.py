@@ -1,13 +1,12 @@
 from os import close
 from time import sleep
-from emoji.core import emojize
 from selenium import webdriver
 import selenium
 import secure_info
 import random
 from datetime import datetime
 from selenium.webdriver.common.keys import Keys
-import emoji
+
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
@@ -50,7 +49,7 @@ def like():
 def comment():
     
     comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!", 
-    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!"] # emoji.emojize(":fire:", use_aliases=True), emoji.emojize(":clap:", use_aliases=True),
+    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!"]
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
 
