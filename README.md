@@ -18,5 +18,5 @@ As of 16 November 2021, this bot logs in, searches for a hashtag (randomly chose
 1. Refine criteria for interaction with accounts
 2. Streamline the code so it is more efficient and can run faster
 3. Follow users who match the criteria
-4. Update log.write to include with which accounts the program has interacted (grab username element and write the text to the log) AND to prepend to the file instead of append.
+4. Update log.write to include post's caption - FIX FOR NON-UTF8 ENCODABLE TEXT - AND to prepend to the file instead of append.
 5. Use sentiment analysis to more accurately comment on posts
