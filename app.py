@@ -38,13 +38,14 @@ def search(tag):
     sleep(random.randint(2, 4))
 
 def like():
-    try:
-        # Like post (click heart)
-        browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button').click()
-        sleep(random.randint(1, 4))      
-    except:
-        print('Error Occurred While Liking')
-        return 
+    # Like post (click heart)
+    heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
+    # heart_button_unclicked = browser.find_element_by_xpath('//*[@aria-label="Like"]')
+    # heart_button_clicked = browser.find_element_by_xpath('//*[@aria-label="Unlike"]')
+    heart_button.click()
+    sleep(random.randint(1, 4))
+
+
 
 def comment():
     
@@ -77,7 +78,7 @@ def writeLogToFile():
     #         IG_log.close()
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     IG_log = open('IG_log.txt', 'a')
-    IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S: ") + "account: " + username + " comment: " + str(comment.silly_comment)))
+    IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "account: " + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
     # username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').getText()
     # line_prepender('IG_log.txt', (datetime.now().strftime("%Y/%m/%d, %H:%M:%S") + str(comment.silly_comment)))
