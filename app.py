@@ -75,8 +75,9 @@ def writeLogToFile():
     #         IG_log.seek(0, 0)
     #         IG_log.write(line.rstrip('\r\n') + '\n' + content)
     #         IG_log.close()
+    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     IG_log = open('IG_log.txt', 'a')
-    IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S: ") + str(comment.silly_comment)))
+    IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S: ") + "account: " + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
     # username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').getText()
     # line_prepender('IG_log.txt', (datetime.now().strftime("%Y/%m/%d, %H:%M:%S") + str(comment.silly_comment)))
@@ -84,7 +85,8 @@ def writeLogToFile():
 
 def run_bot(num_of_interactions=int):
 
-    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax',]
+    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
+    'jazztrumpet', 'jazzdrums',]
     tag = random.choice(tags)
     
     like_count = 0
