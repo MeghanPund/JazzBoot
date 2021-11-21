@@ -92,7 +92,24 @@ def writeLogToFile():
     IG_log.close()
     # username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').getText()
     # line_prepender('IG_log.txt', (datetime.now().strftime("%Y/%m/%d, %H:%M:%S") + str(comment.silly_comment)))
+
+def follow():
+    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
+    caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+    follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
     
+    if follow_button.text == "Follow":
+        try:
+            if  "jazz" in username or "#jazz" in caption:
+                follow_button.click()
+                sleep(random.randint(1, 2))
+            else:
+                return print(username + " not jazzy enough to follow.")  
+        except NoSuchElementException:
+            return
+    elif follow_button.text == "Following":
+        return(print("already following " + username))
+           
 
 def run_bot(num_of_interactions=int):
 
@@ -108,6 +125,7 @@ def run_bot(num_of_interactions=int):
     while like_count < num_of_interactions:
         like()
         comment()
+        follow()
         like_count += 1
         # page right to next post with arrow
         browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
@@ -121,21 +139,3 @@ run_bot(5)
 
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx UNDER CONSTRUCTION xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-def follow():
-    keywords = ['jazz', 'bebop']
-    keyword = random.choice(keywords)
-    address = 'https://www.instagram.com/explore/search/keyword/?q=jazz'
-    browser.get(address)
-    sleep(random.randint(2, 4))
-    # open first post
-    browser.find_element_by_xpath('/html/body/div[1]/section/main/div/div[2]/div/div[1]/div[2]/div/a/div/div[2]').click()
-    sleep(random.randint(2, 4))
-    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
-    caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-    follow_button = browser.find_element_by_xpath('//*[@aria-label="Follow"]')
-    already_followed = browser.find_element_by_xpath('//*[@aria-label="Following"]')
-    
-    if "jazz" in username:
-        follow_button.click()
-    elif "#jazz" in caption:
-        follow_button.click()
