@@ -40,9 +40,14 @@ def search(tag):
 def like():
     # Like post (click heart)
     heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
+    # which class name to target heart by to prevent unlikes?
+    like = browser.find_element_by_class_name('QBdPU rrUvL')
 
-    heart_button.click()
-
+    try:
+        heart_button.click()
+    except:
+        NoSuchElementException
+        print("Post already liked!")
 
 def comment():
     
@@ -51,7 +56,6 @@ def comment():
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
 
-    # try except for disabled comments !! update this to not catch every error !!
     try:
         text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
         text_box.click()
@@ -94,7 +98,7 @@ def follow():
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
-    
+    # fix if else statement
     if follow_button.text == "Follow":
         try:
             if "jazz" in username or "#jazz" or "music" in caption:
