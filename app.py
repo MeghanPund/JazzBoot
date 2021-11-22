@@ -5,7 +5,7 @@ import selenium
 import secure_info
 import random
 from datetime import datetime
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
 PATH = "C:\Program Files (x86)\chromedriver.exe"
@@ -40,11 +40,8 @@ def search(tag):
 def like():
     # Like post (click heart)
     heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
-    # heart_button_unclicked = browser.find_element_by_xpath('//*[@aria-label="Like"]')
-    # heart_button_clicked = browser.find_element_by_xpath('//*[@aria-label="Unlike"]')
-    heart_button.click()
-    sleep(random.randint(1, 4))
 
+    heart_button.click()
 
 
 def comment():
@@ -100,7 +97,7 @@ def follow():
     
     if follow_button.text == "Follow":
         try:
-            if  "jazz" in username or "#jazz" or "music" in caption:
+            if "jazz" in username or "#jazz" or "music" in caption:
                 follow_button.click()
                 sleep(random.randint(1, 2))
             else:
@@ -113,8 +110,8 @@ def follow():
 
 def run_bot(num_of_interactions=int):
 
-    tags = ['jazz','bebop','hardbop','swing', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
-    'jazztrumpet', 'jazzdrums',]
+    tags = ['jazz','bebop','hardbop', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
+    'jazztrumpet', 'jazzdrums', 'jazztrombone', 'jazzorgan', 'jazzpiano', 'jazzbass', 'cooljazz', 'jazzmusic', 'transcription',]
     tag = random.choice(tags)
     
     like_count = 0
