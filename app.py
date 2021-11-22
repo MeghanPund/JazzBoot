@@ -50,7 +50,7 @@ def like():
 def comment():
     
     comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!", 
-    "Believe you can and you’re halfway there!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!"]
+    "Get it!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!",]
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
 
@@ -100,7 +100,7 @@ def follow():
     
     if follow_button.text == "Follow":
         try:
-            if  "jazz" in username or "#jazz" in caption:
+            if  "jazz" in username or "#jazz" or "music" in caption:
                 follow_button.click()
                 sleep(random.randint(1, 2))
             else:
