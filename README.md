@@ -18,6 +18,7 @@ As of 21 November 2021, this bot logs in, searches for a hashtag (randomly chose
 
 ## Future Functionality
 1. Refine criteria for interaction with accounts
-2. Streamline the code so it is more efficient and can run faster
+2. Streamline the code so it is more efficient and can run faster (research Instagram's automation detection)
 3. Update log.write to include post's caption - FIX FOR NON-UTF8 ENCODABLE TEXT - AND to prepend to the file instead of append.
-4. Use sentiment analysis to more accurately comment on posts
+4. (More intense) Use sentiment analysis to more accurately comment on posts
+5. (More intense) Use a translation API to determine the language of a post, read the caption, and translate the comment posted to the correct language.
