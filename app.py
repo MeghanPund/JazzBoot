@@ -17,7 +17,7 @@ def login():
     browser.get("http://www.instagram.com")
     print(browser.title)
 
-    sleep(2)
+    sleep(random.randint(1, 3))
 
     username_input = browser.find_element_by_css_selector("input[name='username']")
     password_input = browser.find_element_by_css_selector("input[name='password']")
@@ -28,20 +28,18 @@ def login():
     login_button = browser.find_element_by_xpath("//div[text()='Log In']")
     login_button.click()
 
-    sleep(2.5)
+    sleep(random.randint(2, 4))
 
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
     browser.get(address + tag)
-    sleep(random.randint(3, 4))
+    sleep(random.randint(4, 5))
     browser.find_elements_by_class_name('_9AhH0')[10].click()
     sleep(random.randint(2, 4))
 
 def like():
     # Like post (click heart)
     heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
-    # which class name to target heart by to prevent unlikes?
-    like = browser.find_element_by_class_name('QBdPU rrUvL')
 
     try:
         heart_button.click()
@@ -71,12 +69,7 @@ def comment():
 
 # update line_prepender, and also update caption to deal with non utf-8 encodable text
 def writeLogToFile():
-    # def line_prepender(filename, line):
-    #     with open(filename, 'r+') as IG_log:
-    #         content = IG_log.read()
-    #         IG_log.seek(0, 0)
-    #         IG_log.write(line.rstrip('\r\n') + '\n' + content)
-    #         IG_log.close()
+
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     
     # def getCaption():
@@ -87,12 +80,10 @@ def writeLogToFile():
     #         caption = "This caption is not encoded with utf-8"
     #         getCaption.caption = caption
 
-    caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+    # caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     IG_log = open('IG_log.txt', 'a')
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
-    # username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').getText()
-    # line_prepender('IG_log.txt', (datetime.now().strftime("%Y/%m/%d, %H:%M:%S") + str(comment.silly_comment)))
 
 def follow():
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
