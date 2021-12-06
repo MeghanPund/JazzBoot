@@ -70,17 +70,7 @@ def comment():
 # update line_prepender, and also update caption to deal with non utf-8 encodable text
 def writeLogToFile():
 
-    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
-    
-    # def getCaption():
-    #     try:
-    #         caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-    #         getCaption.caption = caption
-    #     except UnicodeEncodeError:
-    #         caption = "This caption is not encoded with utf-8"
-    #         getCaption.caption = caption
-
-    # caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text  
     IG_log = open('IG_log.txt', 'a')
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
@@ -131,3 +121,12 @@ run_bot(5)
 
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx UNDER CONSTRUCTION xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+# def getCaption():
+#     try:
+#         caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+#         getCaption.caption = caption
+#     except UnicodeEncodeError:
+#         caption = "This caption is not encoded with utf-8"
+#         getCaption.caption = caption
+
+# caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
