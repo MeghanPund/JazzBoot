@@ -10,6 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
 
+# open browser (default is Chrome), navigate to Instagram, input username and password, click "Log In"
 def login():
 
     browser.implicitly_wait(3)
@@ -31,6 +32,7 @@ def login():
 
     sleep(random.randint(4, 5))
 
+# search function appends randomly selected hashtag (passed into function as "tag") to address and navigates to page
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
     browser.get(address + tag)
@@ -39,6 +41,7 @@ def search(tag):
     browser.find_elements_by_class_name('_9AhH0')[10].click()
     sleep(random.randint(2, 4))
 
+# likes the post if possible. If already liked, prints "Post already liked!"
 def like():
     # Like post (click heart)
     heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
@@ -49,6 +52,7 @@ def like():
         NoSuchElementException
         print("Post already liked!")
 
+# tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.
 def comment():
     
     # an array of silly comments from which we randomly choose one
@@ -80,13 +84,12 @@ def writeLogToFile():
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
 
+# if a user is not yet followed, bot begins following them
 def follow():
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
     
-    # printing caption for testing purposes
-    print(caption)
     # need to fix if else statement in follow criteria
     if follow_button.text == "Follow":
         try:
@@ -104,7 +107,7 @@ def follow():
 # posts while keeping track of each interaction by logging it in IG_log.txt
 def run_bot(num_of_interactions=int):
 
-    # like random comments, but jazz-adjacent hashtags from which the program will randomly choose and search
+    # jazz-adjacent hashtags from which the program will randomly choose and search
     tags = ['jazz','bebop','hardbop', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
     'jazztrumpet', 'jazzdrums', 'jazztrombone', 'jazzorgan', 'jazzpiano', 'jazzbass', 'cooljazz', 'jazzmusic', 'transcription',]
     tag = random.choice(tags)
@@ -126,8 +129,10 @@ def run_bot(num_of_interactions=int):
         sleep(random.randint(1, 2))
         writeLogToFile()
     print("You've liked and commented on", like_count, "posts. All done!")
+    # closes the browser at the end of the program
     browser.quit()
 
+# the most important function call in the whole program. Also where we pass in how many accounts with which the bot will interact.
 run_bot(5)
 
 
