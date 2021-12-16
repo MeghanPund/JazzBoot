@@ -21,5 +21,6 @@ As of December 2021, this bot logs in, searches for a hashtag (randomly chosen f
 2. Refine criteria for interaction with accounts
 3. Streamline the code so it is more efficient and can run faster (research Instagram's automation detection)
 4. Update log.write to include post's caption - FIX FOR NON-UTF8 ENCODABLE TEXT - AND to prepend to the file instead of append.
-5. (More intense) Use sentiment analysis to more accurately comment on posts
-6. (More intense) Use a translation API to determine the language of a post, read the caption, and translate the comment posted to the correct language.
+5. (Simple, but not useful) Watch stories function
+6. (More intense) Use sentiment analysis to more accurately comment on posts
+7. (More intense) Use a translation API to determine the language of a post, read the caption, and translate the comment posted to the correct language.
