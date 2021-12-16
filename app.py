@@ -16,7 +16,7 @@ def login():
     browser.get("http://www.instagram.com")
     print(browser.title)
 
-    # we sleep randomly to emulate human interaction and evade bot detection 
+    # we sleep randomly throughout the program to emulate human interaction and evade bot detection 
     sleep(random.randint(2, 4))
 
     username_input = browser.find_element_by_css_selector("input[name='username']")
@@ -35,6 +35,7 @@ def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
     browser.get(address + tag)
     sleep(random.randint(4, 5))
+    # program locates most recent post with hashtag and clicks it
     browser.find_elements_by_class_name('_9AhH0')[10].click()
     sleep(random.randint(2, 4))
 
@@ -84,10 +85,12 @@ def follow():
     caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
     
+    # printing caption for testing purposes
+    print(caption)
     # need to fix if else statement in follow criteria
     if follow_button.text == "Follow":
         try:
-            if "jazz" in username or "#jazz" or "music" in caption:
+            if "jazz" in username or "#jazz" or "#music" in caption:
                 follow_button.click()
                 sleep(random.randint(1, 2))
             else:
