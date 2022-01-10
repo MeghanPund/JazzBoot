@@ -11,9 +11,8 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
 
 
-# open browser (default is Chrome), navigate to Instagram, input username and password, click "Log In"
 def login():
-
+    '''Open browser (default is Chrome), navigate to Instagram, input username and password, click "Log In"'''
     browser.implicitly_wait(3)
     browser.get("http://www.instagram.com")
     print(browser.title)
@@ -24,7 +23,7 @@ def login():
     username_input = browser.find_element_by_css_selector("input[name='username']")
     password_input = browser.find_element_by_css_selector("input[name='password']")
 
-    # input your name and password as string surrounded by quotes
+    # input your name and password into the parenthesis as string surrounded by quotes
     username_input.send_keys(secure_info.username2)
     password_input.send_keys(secure_info.password2)
 
@@ -34,8 +33,8 @@ def login():
     sleep(random.randint(4, 5))
 
 
-# search function appends randomly selected hashtag (passed into function as "tag") to address and navigates to page
 def search(tag):
+    '''Appends randomly selected hashtag (passed into function as "tag" argument) to address and navigates to page'''
     address = 'https://www.instagram.com/explore/tags/'
     browser.get(address + tag)
     sleep(random.randint(4, 5))
@@ -44,8 +43,8 @@ def search(tag):
     sleep(random.randint(2, 4))
 
 
-# likes the post if possible. If already liked, prints "Post already liked!"
 def like():
+    '''Likes the post if possible. If already liked, prints "Post already liked!"'''
     # Like post (click heart)
     heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
 
@@ -55,9 +54,8 @@ def like():
         print("Post already liked!")
 
 
-# tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.
 def comment():
-
+    '''Tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.'''
     # an array of silly comments from which we randomly choose one
     comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!",
                 "Get it!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!", ]
@@ -77,18 +75,19 @@ def comment():
         print('User has disabled comments on this post.')
 
 
-# this funciton logs all of the bot's commenting on the posts by recording the username of the account and the comment that was posted by the bot
 # need to update to prepend to log instead of append, and also update caption to deal with non utf-8 encodable text
 def writeLogToFile():
-
+    '''Logs all of the bot's commenting on the posts by
+       recording the username of the account and the comment that was posted by the bot
+       '''
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     IG_log = open('IG_log.txt', 'a')
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
 
 
-# if a user is not yet followed, bot begins following them
 def follow():
+    '''If a user is not yet followed, bot begins following them'''
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
@@ -107,10 +106,11 @@ def follow():
         return(print("already following " + username))
 
 
-# we pass in the number of posts with which we want to interact as an integer and this function searches for a hashtag, then executes like, comment, and follow on recent
-# posts while keeping track of each interaction by logging it in IG_log.txt
 def run_bot(num_of_interactions=int):
-
+    '''we pass in the number of posts with which we want to interact as an integer
+    and this function searches for a hashtag, then executes like, comment, and follow
+    on recent posts while keeping track of each interaction by logging it in IG_log.txt
+    '''
     # jazz-adjacent hashtags from which the program will randomly choose and search
     tags = ['jazz', 'bebop', 'hardbop', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
             'jazztrumpet', 'jazzdrums', 'jazztrombone', 'jazzorgan', 'jazzpiano', 'jazzbass', 'cooljazz', 'jazzmusic', 'transcription', ]
