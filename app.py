@@ -10,6 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 PATH = "C:\Program Files (x86)\chromedriver.exe"
 browser = webdriver.Chrome(PATH)
 
+
 # open browser (default is Chrome), navigate to Instagram, input username and password, click "Log In"
 def login():
 
@@ -32,6 +33,7 @@ def login():
 
     sleep(random.randint(4, 5))
 
+
 # search function appends randomly selected hashtag (passed into function as "tag") to address and navigates to page
 def search(tag):
     address = 'https://www.instagram.com/explore/tags/'
@@ -40,6 +42,7 @@ def search(tag):
     # program locates most recent post with hashtag and clicks it
     browser.find_elements_by_class_name('_9AhH0')[10].click()
     sleep(random.randint(2, 4))
+
 
 # likes the post if possible. If already liked, prints "Post already liked!"
 def like():
@@ -51,6 +54,7 @@ def like():
     except:
         NoSuchElementException
         print("Post already liked!")
+
 
 # tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.
 def comment():
@@ -84,6 +88,7 @@ def writeLogToFile():
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
 
+
 # if a user is not yet followed, bot begins following them
 def follow():
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
@@ -102,7 +107,8 @@ def follow():
             return
     elif follow_button.text == "Following":
         return(print("already following " + username))
-           
+
+
 # we pass in the number of posts with which we want to interact as an integer and this function searches for a hashtag, then executes like, comment, and follow on recent 
 # posts while keeping track of each interaction by logging it in IG_log.txt
 def run_bot(num_of_interactions=int):
@@ -131,6 +137,7 @@ def run_bot(num_of_interactions=int):
     print("You've liked and commented on", like_count, "posts. All done!")
     # closes the browser at the end of the program
     browser.quit()
+
 
 # the most important function call in the whole program. Also where we pass in how many accounts with which the bot will interact.
 run_bot(5)
