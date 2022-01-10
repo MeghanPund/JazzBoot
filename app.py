@@ -77,9 +77,10 @@ def comment():
 
 # need to update to prepend to log instead of append, and also update caption to deal with non utf-8 encodable text
 def writeLogToFile():
-    '''Logs all of the bot's commenting on the posts by
-       recording the username of the account and the comment that was posted by the bot
-       '''
+    '''
+    Logs all of the bot's commenting on the posts by
+    recording the username of the account and the comment that was posted by the bot
+    '''
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     IG_log = open('IG_log.txt', 'a')
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
@@ -107,7 +108,8 @@ def follow():
 
 
 def run_bot(num_of_interactions=int):
-    '''we pass in the number of posts with which we want to interact as an integer
+    '''
+    We pass in the number of posts with which we want to interact as an integer
     and this function searches for a hashtag, then executes like, comment, and follow
     on recent posts while keeping track of each interaction by logging it in IG_log.txt
     '''
