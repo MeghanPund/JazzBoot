@@ -18,7 +18,7 @@ def login():
     browser.get("http://www.instagram.com")
     print(browser.title)
 
-    # we sleep randomly throughout the program to emulate human interaction and evade bot detection 
+    # we sleep randomly throughout the program to emulate human interaction and evade bot detection
     sleep(random.randint(2, 4))
 
     username_input = browser.find_element_by_css_selector("input[name='username']")
@@ -51,17 +51,16 @@ def like():
 
     try:
         heart_button.click()
-    except:
-        NoSuchElementException
+    except NoSuchElementException:
         print("Post already liked!")
 
 
 # tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.
 def comment():
-    
+
     # an array of silly comments from which we randomly choose one
-    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!", 
-    "Get it!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!",]
+    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!",
+                "Get it!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!", ]
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
 
@@ -74,16 +73,15 @@ def comment():
         comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
         comment_button.click()
         sleep(random.randint(3, 4))
-    except:
-        NoSuchElementException
-        print('User has disabled comments on this post.')  
-      
+    except NoSuchElementException:
+        print('User has disabled comments on this post.')
+
 
 # this funciton logs all of the bot's commenting on the posts by recording the username of the account and the comment that was posted by the bot
 # need to update to prepend to log instead of append, and also update caption to deal with non utf-8 encodable text
 def writeLogToFile():
 
-    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text  
+    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     IG_log = open('IG_log.txt', 'a')
     IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
     IG_log.close()
@@ -94,7 +92,7 @@ def follow():
     username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
     follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
-    
+
     # need to fix if else statement in follow criteria
     if follow_button.text == "Follow":
         try:
@@ -102,28 +100,28 @@ def follow():
                 follow_button.click()
                 sleep(random.randint(1, 2))
             else:
-                return print(username + " not jazzy enough to follow.")  
+                return print(username + " not jazzy enough to follow.")
         except NoSuchElementException:
             return
     elif follow_button.text == "Following":
         return(print("already following " + username))
 
 
-# we pass in the number of posts with which we want to interact as an integer and this function searches for a hashtag, then executes like, comment, and follow on recent 
+# we pass in the number of posts with which we want to interact as an integer and this function searches for a hashtag, then executes like, comment, and follow on recent
 # posts while keeping track of each interaction by logging it in IG_log.txt
 def run_bot(num_of_interactions=int):
 
     # jazz-adjacent hashtags from which the program will randomly choose and search
-    tags = ['jazz','bebop','hardbop', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
-    'jazztrumpet', 'jazzdrums', 'jazztrombone', 'jazzorgan', 'jazzpiano', 'jazzbass', 'cooljazz', 'jazzmusic', 'transcription',]
+    tags = ['jazz', 'bebop', 'hardbop', 'transcribe', 'bigband', 'jazzband', 'saxophone', 'jazzsax', 'charlieparker', 'dizzygillespie',
+            'jazztrumpet', 'jazzdrums', 'jazztrombone', 'jazzorgan', 'jazzpiano', 'jazzbass', 'cooljazz', 'jazzmusic', 'transcription', ]
     tag = random.choice(tags)
-    
+
     # initiate like_count at 0 so we keep track of the number of posts interacted with
     like_count = 0
-    
+
     login()
     search(tag)
-    
+
     # contiue liking and commenting on posts and then following the user until the prescribed number (passed into run_bot function) is reached
     while like_count < num_of_interactions:
         like()
