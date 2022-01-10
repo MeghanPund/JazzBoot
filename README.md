@@ -2,6 +2,9 @@
 ## Program Description
 A foray into browser automation, featuring selenium.
 
+## A Video of the Program in Action:
+[(https://drive.google.com/file/d/1oG5GnFFOKXbuZwLOHu-AhbgDJG0eXfs0/view?usp=sharing)]
+
 ## Note
 If you intend to clone this and run it with your own account:
 - you will need to find 
