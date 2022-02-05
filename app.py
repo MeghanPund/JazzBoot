@@ -24,8 +24,8 @@ def login():
     password_input = browser.find_element(By.CSS_SELECTOR, "input[name='password']")
 
     # input your name and password into the parenthesis as string surrounded by quotes
-    username_input.send_keys(secure_info.username2)
-    password_input.send_keys(secure_info.password2)
+    username_input.send_keys(secure_info.username)
+    password_input.send_keys(secure_info.password)
 
     login_button = browser.find_element(By.XPATH, "//div[text()='Log In']")
     login_button.click()
@@ -81,19 +81,21 @@ def writeLogToFile():
     Logs all of the bot's commenting on the posts by
     recording the username of the account and the comment that was posted by the bot
     '''
-    username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
+    # username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
+    # username xpath needs updating after IG update
     with open('IG_log.txt', 'a') as IG_log:
-        IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
+        IG_log.write(f'\n{datetime.now().strftime("%Y/%m/%d %H:%M:%S ")}@ comment: {str(comment.silly_comment)}')
 
 
 def follow():
     '''If a user is not yet followed, bot begins following them'''
-    username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
-    caption = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-    follow_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
+    username = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/h2/div/span/a').text
+    caption = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+    follow_button = browser.find_element(By.LINK_TEXT, 'Follow')
+    unfollow_button = browser.find_element(By.LINK_TEXT, 'Unfollow')
 
     # need to fix if else statement in follow criteria
-    if follow_button.text == "Follow":
+    if follow_button:
         try:
             if "jazz" in username or "#jazz" or "#music" in caption:
                 follow_button.click()
@@ -102,7 +104,7 @@ def follow():
                 return print(username + " not jazzy enough to follow.")
         except NoSuchElementException:
             return
-    elif follow_button.text == "Following":
+    elif unfollow_button:
         return(print("already following " + username))
 
 
@@ -127,10 +129,10 @@ def run_bot(num_of_interactions=int):
     while like_count < num_of_interactions:
         like()
         comment()
-        follow()
+        # follow() is currently broken (IG made an update that broke it)
         like_count += 1
         # page right to next post with arrow
-        browser.find_element(By.XPATH, '/html/body/div[6]/div[1]/div/div/div[2]/button').click()
+        browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div[2]/button').click()
         sleep(random.randint(1, 2))
         writeLogToFile()
     print("You've liked and commented on", like_count, "posts. All done!")
