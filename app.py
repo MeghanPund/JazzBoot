@@ -46,7 +46,7 @@ def search(tag):
 def like():
     '''Likes the post if possible. If already liked, prints "Post already liked!"'''
     # Like post (click heart)
-    heart_button = browser.find_element(By.XPATH, "/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button/div[2]/span/svg")
+    heart_button = browser.find_element(By.XPATH, "/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button")
 
     try:
         heart_button.click()
@@ -88,9 +88,9 @@ def writeLogToFile():
 
 def follow():
     '''If a user is not yet followed, bot begins following them'''
-    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
-    caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-    follow_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
+    username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
+    caption = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
+    follow_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
 
     # need to fix if else statement in follow criteria
     if follow_button.text == "Follow":
@@ -130,7 +130,7 @@ def run_bot(num_of_interactions=int):
         follow()
         like_count += 1
         # page right to next post with arrow
-        browser.find_element_by_xpath('/html/body/div[6]/div[1]/div/div/div[2]/button').click()
+        browser.find_element(By.XPATH, '/html/body/div[6]/div[1]/div/div/div[2]/button').click()
         sleep(random.randint(1, 2))
         writeLogToFile()
     print("You've liked and commented on", like_count, "posts. All done!")
