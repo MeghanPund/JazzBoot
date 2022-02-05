@@ -20,14 +20,14 @@ def login():
     # we sleep randomly throughout the program to emulate human interaction and evade bot detection
     sleep(random.randint(2, 4))
 
-    username_input = browser.find_element_by_css_selector("input[name='username']")
-    password_input = browser.find_element_by_css_selector("input[name='password']")
+    username_input = browser.find_element(By.CSS_SELECTOR, "input[name='username']")
+    password_input = browser.find_element(By.CSS_SELECTOR, "input[name='password']")
 
     # input your name and password into the parenthesis as string surrounded by quotes
     username_input.send_keys(secure_info.username2)
     password_input.send_keys(secure_info.password2)
 
-    login_button = browser.find_element_by_xpath("//div[text()='Log In']")
+    login_button = browser.find_element(By.XPATH, "//div[text()='Log In']")
     login_button.click()
 
     sleep(random.randint(4, 5))
@@ -39,14 +39,14 @@ def search(tag):
     browser.get(address + tag)
     sleep(random.randint(4, 5))
     # program locates most recent post with hashtag and clicks it
-    browser.find_elements_by_class_name('_9AhH0')[10].click()
+    browser.find_elements(By.CLASS_NAME, '_9AhH0')[10].click()
     sleep(random.randint(2, 4))
 
 
 def like():
     '''Likes the post if possible. If already liked, prints "Post already liked!"'''
     # Like post (click heart)
-    heart_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button')
+    heart_button = browser.find_element(By.XPATH, "/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/section[1]/span[1]/button/div[2]/span/svg")
 
     try:
         heart_button.click()
@@ -57,18 +57,18 @@ def like():
 def comment():
     '''Tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.'''
     # an array of silly comments from which we randomly choose one
-    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it’s done!", "Enjoy every moment of the journey!",
-                "Get it!", "You’re on fire!", "That’s the way to do it!", "You're absolutely killing it!", ]
+    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it's done!", "Enjoy every moment of the journey!",
+                "Get it!", "You're on fire!", "That's the way to do it!", "You're absolutely killing it!", ]
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
 
     # program attempts to post comment. If commenting is disabled on post, program alerts user with message.
     try:
-        text_box = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+        text_box = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
         text_box.click()
-        browser.find_element_by_xpath('//*[@aria-label="Add a comment…"]').send_keys(silly_comment)
+        browser.find_element(By.XPATH, '//*[@aria-label="Add a comment…"]').send_keys(silly_comment)
         sleep(random.randint(1, 2))
-        comment_button = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
+        comment_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
         comment_button.click()
         sleep(random.randint(3, 4))
     except NoSuchElementException:
@@ -81,10 +81,9 @@ def writeLogToFile():
     Logs all of the bot's commenting on the posts by
     recording the username of the account and the comment that was posted by the bot
     '''
-    username = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
-    IG_log = open('IG_log.txt', 'a')
-    IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
-    IG_log.close()
+    username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
+    with open('IG_log.txt', 'a') as IG_log:
+        IG_log.write(('\n' + datetime.now().strftime("%Y/%m/%d %H:%M:%S ") + "@" + username + " comment: " + str(comment.silly_comment)))
 
 
 def follow():
