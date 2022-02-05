@@ -64,11 +64,11 @@ def comment():
 
     # program attempts to post comment. If commenting is disabled on post, program alerts user with message.
     try:
-        text_box = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/textarea')
+        text_box = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form')
         text_box.click()
         browser.find_element(By.XPATH, '//*[@aria-label="Add a comment…"]').send_keys(silly_comment)
         sleep(random.randint(1, 2))
-        comment_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button[2]')
+        comment_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[2]/section[3]/div/form/button')
         comment_button.click()
         sleep(random.randint(3, 4))
     except NoSuchElementException:
@@ -90,7 +90,7 @@ def follow():
     '''If a user is not yet followed, bot begins following them'''
     username = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/span/a').text
     caption = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-    follow_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
+    follow_button = browser.find_element(By.XPATH, '/html/body/div[6]/div[3]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[2]/button')
 
     # need to fix if else statement in follow criteria
     if follow_button.text == "Follow":
