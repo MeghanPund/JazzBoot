@@ -1,4 +1,4 @@
-python-virtual-environments/
+venv
 secure_info.py
 __pycache__/
 IG_log.txt
