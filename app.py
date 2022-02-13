@@ -57,7 +57,7 @@ def like():
 def comment():
     '''Tries to comment a random silly comment on the post. If commenting is disabled, user of program gets alert.'''
     # an array of silly comments from which we randomly choose one
-    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!", "It always seems impossible until it's done!", "Enjoy every moment of the journey!",
+    comments = ["Can't stop, won't stop!", "Yaaaaass!!", "Get in there!!",
                 "Get it!", "You're on fire!", "That's the way to do it!", "You're absolutely killing it!", ]
     silly_comment = random.choice(comments)
     comment.silly_comment = silly_comment
