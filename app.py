@@ -142,16 +142,3 @@ def run_bot(num_of_interactions=int):
 
 # the most important function call in the whole program. Also where we pass in how many accounts with which the bot will interact.
 run_bot(5)
-
-
-# xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx UNDER CONSTRUCTION xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-# def getCaption():
-#     try:
-#         caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
-#         getCaption.caption = caption
-#     except UnicodeEncodeError:
-#         caption = "This caption is not encoded with utf-8"
-#         getCaption.caption = caption
-
-# caption = browser.find_element_by_xpath('/html/body/div[6]/div[2]/div/article/div/div[2]/div/div/div[2]/div[1]/ul/div/li/div/div/div[2]/span').text
